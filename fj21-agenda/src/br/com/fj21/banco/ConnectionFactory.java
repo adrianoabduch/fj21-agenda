@@ -10,6 +10,7 @@ public class ConnectionFactory {
 		
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
+//			TESTE
 			return DriverManager.getConnection("jdbc:mysql://localhost/fj21", "root", "123456");
 		} catch (SQLException e) {
 			e.printStackTrace();

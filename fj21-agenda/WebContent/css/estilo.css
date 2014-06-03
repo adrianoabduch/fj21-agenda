@@ -1,0 +1,38 @@
+html {
+	color: #666;
+	font-size: 0.9em;
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+
+.formulario {
+	width: 450px;
+	margin: 20px auto;
+	border: 2px solid brown;
+}
+.formulario label {
+	float: left;
+	text-align: right;
+	width: 120px;
+	clear: left;
+	padding: 5px;
+}
+
+.formulario input[type="text"] {
+	float: left;
+	width: 120px;
+	margin: 5px;
+}
+
+.formulario .buttons {
+	width: 450px;
+	clear: both;
+	text-align: right;
+}
+
+.buttons input {
+	background: white;
+	border: 1px solid;
+	font-weight: bold;
+	color: #666;
+	font-size: 0.9em;
+}

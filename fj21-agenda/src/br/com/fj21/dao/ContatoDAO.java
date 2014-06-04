@@ -61,4 +61,16 @@ public class ContatoDAO {
 		ps.execute();
 		con.close();
 	}
+	
+	public boolean deletaContato(Long contatoId) throws SQLException {
+		String queryString = "delete from contatos where id = ? ";
+		
+		PreparedStatement ps = ConnectionFactory.getConnection().prepareStatement(queryString);
+		ps.setLong(1, contatoId);
+		
+		boolean sucesso = ps.execute();
+		ps.close();
+		
+		return sucesso;
+	}
 }

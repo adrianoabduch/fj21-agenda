@@ -6,9 +6,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
-import br.com.fj21.entidades.Contato;
 import br.com.fj21.banco.ConnectionFactory;
+import br.com.fj21.entidades.Contato;
 
 public class ContatoDAO {
 	
@@ -72,5 +74,39 @@ public class ContatoDAO {
 		ps.close();
 		
 		return sucesso;
+	}
+	
+	public List<Contato> buscaTodos() throws SQLException {
+		String queryString = "select * from contatos ";
+		
+		PreparedStatement ps = ConnectionFactory.getConnection().prepareStatement(queryString);
+		ResultSet rs = ps.executeQuery();
+		
+		List<Contato> lista = new ArrayList();
+		while(rs.next()) {
+			Contato c = new Contato();
+			c.setId(rs.getLong("id"));
+			c.setNome(rs.getString("nome"));
+			c.setEmail(rs.getString("email"));
+			c.setEndereco(rs.getString("endereco"));
+			try {
+				String dataString = rs.getString("dataNascimento");
+				SimpleDateFormat dataFormat = new SimpleDateFormat("yyyy-MM-dd");
+				c.setDataNascimento(dataFormat.parse(dataString));
+			} catch (ParseException e) {
+			}
+			
+			lista.add(c);
+		}
+		
+		rs.close();
+		ps.close();
+		
+		return lista;
+		
+	}
+	
+	public List<Contato> getLista() throws SQLException {
+		return buscaTodos();
 	}
 }

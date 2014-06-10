@@ -7,9 +7,11 @@
 		
 		Mensagem = <%= mensagem %>
 		
+		${mensagem}
+		
 		<% out.print(pageContext.getRequest().getParameter("teste")); %>
 		
-		${param.teste}		
+		${param.teste}
 		
 	</body>
 </html>

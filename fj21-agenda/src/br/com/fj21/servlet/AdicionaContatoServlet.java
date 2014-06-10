@@ -1,11 +1,11 @@
 package br.com.fj21.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -41,13 +41,16 @@ public class AdicionaContatoServlet extends HttpServlet {
 		
 		ContatoDAO contatoDAO = new ContatoDAO();
 		try {
-			contatoDAO.insereContato(c);
+			contatoDAO.salvar(c);
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
 		
-		PrintWriter out = res.getWriter();
-		out.println("Contato \"" + c.getNome() + "\" salvo com sucesso.");
+//		PrintWriter out = res.getWriter();
+//		out.println("Contato \"" + c.getNome() + "\" salvo com sucesso.");
+		
+		RequestDispatcher rd = req.getRequestDispatcher("/contato-adicionado.jsp");
+		rd.forward(req, res);
 		
 	}
 

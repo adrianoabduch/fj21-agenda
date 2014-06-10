@@ -14,7 +14,7 @@ import br.com.fj21.entidades.Contato;
 
 public class ContatoDAO {
 	
-	public Contato findContatoById(Long id) throws SQLException {
+	public Contato findById(Long id) throws SQLException {
 		String queryString = "select * from contatos where id = ? ";
 		
 		Connection con = ConnectionFactory.getConnection();
@@ -45,7 +45,34 @@ public class ContatoDAO {
 		return c;
 	}
 	
-	public void insereContato(Contato c) throws SQLException {
+	public void salvar(Contato c) throws SQLException {
+		if(c != null && c.getId() != null)
+			atualizar(c);
+		else
+			inserir(c);
+	}
+	
+	private void atualizar(Contato c) throws SQLException {
+		String queryString = "update contato set nome = ?, email = ?, endereco = ?, dataNascimento = ? where id = ? ";
+		
+		Connection con = ConnectionFactory.getConnection();
+		
+		PreparedStatement ps = con.prepareStatement(queryString);
+		ps.setString(1, c.getNome());
+		ps.setString(2, c.getEmail());
+		ps.setString(3, c.getEndereco());
+		try {
+			ps.setDate(4, new java.sql.Date(c.getDataNascimento().getTime()));
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+		ps.setLong(5, c.getId());
+		
+		ps.execute();
+		con.close();
+	}
+	
+	private void inserir(Contato c) throws SQLException {
 		String queryString = "insert into contatos (nome, email, endereco, dataNascimento) values (?,?,?,?) ";
 		
 		Connection con = ConnectionFactory.getConnection();

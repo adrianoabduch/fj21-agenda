@@ -25,7 +25,7 @@ public class PrimeiraServlet extends HttpServlet {
 		
 		Contato c = null;
 		try {
-			c = contatoDAO.findContatoById(1L);
+			c = contatoDAO.findById(1L);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

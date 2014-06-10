@@ -11,7 +11,7 @@ public class TestaBase {
 		ContatoDAO contatoDAO = new ContatoDAO();
 		Contato c = null;
 		try {
-			c = contatoDAO.findContatoById(5L);
+			c = contatoDAO.findById(5L);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
